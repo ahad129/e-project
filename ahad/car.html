@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrari Inspired Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Loader -->
+<div class="loader">
+    <div class="loader-logo">FERRARI</div>
+    <div class="loader-bar"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-logo">FERRARI</div>
+    <ul class="nav-links">
+        <li>Models</li>
+        <li>Racing</li>
+        <li>Store</li>
+        <li>About</li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero">
+    <div class="hero-content">
+        <h1>DRIVEN BY PASSION</h1>
+        <p>The evolution of performance and style.</p>
+    </div>
+</header>
+
+<!-- Car Cards -->
+<section class="models">
+    <h2 class="section-title">Featured Models</h2>
+
+    <div class="card-container">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023" alt="">
+            <h3>F8 Tributo</h3>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1617814077067-3f87a2fbf139" alt="">
+            <h3>SF90 Stradale</h3>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1606813902911-9988fe2a5632" alt="">
+            <h3>812 Superfast</h3>
+        </div>
+    </div>
+</section>
+<style>
+    /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #000;
+    color: #fff;
+}
+
+/* Loader */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 1.8s ease 1.2s forwards;
+}
+
+.loader-logo {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+    color: #cc0000;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.loader-bar {
+    width: 180px;
+    height: 5px;
+    background: #222;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader-bar::before {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 100%;
+    background: #cc0000;
+    animation: load 1.2s infinite linear;
+}
+
+@keyframes load {
+    from { left: -60px; }
+    to { left: 180px; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    position: absolute;
+    top: 0;
+}
+
+.nav-logo {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #cc0000;
+    letter-spacing: 3px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links li {
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: .3s;
+}
+.nav-links li:hover { opacity: 1; }
+
+/* Hero Section */
+.hero {
+    height: 90vh;
+    background: url("https://images.unsplash.com/photo-1519681393784-d120267933ba")
+                center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    color: #cc0000;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+}
+
+/* Models Section */
+.section-title {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #cc0000;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-bottom: 60px;
+}
+
+.card {
+    width: 300px;
+    background: #111;
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.4s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #cc0000;
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 40px rgba(204,0,0,0.25);
+}
+
+</style>
+</body>
+</html>
+
