@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterpiece Collection | ULTIMA Luxury Perfumes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --platinum: #e5e4e2;
+            --gold: #ffd700;
+            --gold-dark: #b8860b;
+            --black: #0a0a0a;
+            --black-light: #1a1a1a;
+            --off-white: #f5f5f5;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-dark: rgba(0, 0, 0, 0.7);
+            --gradient-gold: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #daa520 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--off-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: none;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 40px;
+            }
+        }
+
+        /* ======================== */
+        /* CUSTOM CURSOR ANIMATIONS */
+        /* ======================== */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            display: none;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.1s ease;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .cursor, .cursor-follower {
+                display: block;
+            }
+            
+            body {
+                cursor: none;
+            }
+        }
+
+        .cursor.hover {
+            transform: scale(1.5);
+            border-color: #ffd700;
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        .cursor.click {
+            transform: scale(0.8);
+            border-color: #b8860b;
+        }
+
+        .cursor.text-hover {
+            width: 80px;
+            height: 80px;
+            border-width: 1px;
+            border-color: rgba(255, 215, 0, 0.5);
+            background-color: rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        /* ============= */
+        /* PRELOADER */
+        /* ============= */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-text {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .preloader-text {
+                font-size: 2rem;
+            }
+        }
+
+        .preloader-text::after {
+            content: 'MASTERPIECE';
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: transparent;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            width: 0%;
+            overflow: hidden;
+            animation: preloader 3s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        @keyframes preloader {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ============= */
+        /* HEADER */
+        /* ============= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            background: transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 15px 0;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1001;
+        }
+
+        @media (min-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .logo {
+                font-size: 3.5rem;
+                letter-spacing: 5px;
+            }
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .logo:hover::before {
+            left: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gold);
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+
+        @media (min-width: 1024px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(10, 10, 10, 0.98);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            list-style: none;
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .nav-links li {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .nav-links.active li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-links li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-links li:nth-child(2) { transition-delay: 0.2s; }
+        .nav-links li:nth-child(3) { transition-delay: 0.3s; }
+        .nav-links li:nth-child(4) { transition-delay: 0.4s; }
+        .nav-links li:nth-child(5) { transition-delay: 0.5s; }
+
+        .nav-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            font-weight: 300;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            position: relative;
+            padding: 10px 0;
+            transition: all 0.5s ease;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-links {
+                position: static;
+                width: auto;
+                height: auto;
+                background: transparent;
+                flex-direction: row;
+                gap: 40px;
+                backdrop-filter: none;
+                right: 0;
+                height: auto;
+                justify-content: flex-end;
+            }
+            
+            .nav-links li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 8px 0;
+            }
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .nav-links a::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: top 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .nav-links a:hover {
+            color: transparent;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links a:hover::after {
+            top: 0;
+        }
+
+        /* Nav Icons */
+        .nav-icons {
+            display: none;
+            align-items: center;
+            gap: 20px;
+            z-index: 1001;
+        }
+
+        @media (min-width: 768px) {
+            .nav-icons {
+                display: flex;
+            }
+        }
+
+        .nav-icons a {
+            color: var(--platinum);
+            font-size: 1.1rem;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .nav-icons a:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        /* ===================== */
+        /* MASTERPIECE HERO */
+        /* ===================== */
+        .masterpiece-hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 100px;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+        }
+
+        .masterpiece-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .masterpiece-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .masterpiece-hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(90deg, var(--gold), #fff, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        @media (min-width: 768px) {
+            .masterpiece-hero-title {
+                font-size: 4rem;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masterpiece-hero-title {
+                font-size: 5rem;
+            }
+        }
+
+        .masterpiece-hero-subtitle {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        @media (min-width: 768px) {
+            .masterpiece-hero-subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 50px;
+            }
+        }
+
+        /* ===================== */
+        /* MASTERPIECE INTRO */
+        /* ===================== */
+        .masterpiece-intro {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--black) 0%, var(--black-light) 100%);
+        }
+
+        .intro-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+            position: relative;
+            display: inline-block;
+        }
+
+        .intro-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--gradient-gold);
+        }
+
+        @media (min-width: 768px) {
+            .intro-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .intro-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        @media (min-width: 768px) {
+            .intro-stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===================== */
+        /* MASTERPIECE COLLECTIONS */
+        /* ===================== */
+        .masterpiece-collections {
+            padding: 100px 0;
+            position: relative;
+            background: var(--black);
+        }
+
+        .collections-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--gold);
+            position: relative;
+        }
+
+        .collections-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: var(--gradient-gold);
+        }
+
+        @media (min-width: 768px) {
+            .collections-title {
+                font-size: 3.5rem;
+                margin-bottom: 80px;
+            }
+        }
+
+        .masterpiece-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .masterpiece-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 60px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masterpiece-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 80px;
+            }
+        }
+
+        .masterpiece-item {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 15px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .masterpiece-item:hover {
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .masterpiece-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.15) 100%);
+            z-index: 1;
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+
+        .masterpiece-item:hover::before {
+            opacity: 1;
+        }
+
+        .masterpiece-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .masterpiece-item:hover .masterpiece-image {
+            transform: scale(1.1);
+        }
+
+        .masterpiece-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+            z-index: 2;
+        }
+
+        .masterpiece-limited {
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        .masterpiece-name {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .masterpiece-name {
+                font-size: 2.5rem;
+            }
+        }
+
+        .masterpiece-price {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .masterpiece-price .price-note {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+        .masterpiece-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            text-decoration: none;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            font-size: 0.9rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .masterpiece-btn::before, .masterpiece-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-gold);
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: -1;
+        }
+
+        .masterpiece-btn::before {
+            top: 0;
+            left: 0;
+            transform: translateX(-100%);
+        }
+
+        .masterpiece-btn::after {
+            top: 0;
+            left: 0;
+            transform: translateX(100%);
+        }
+
+        .masterpiece-btn:hover {
+            color: var(--black);
+        }
+
+        .masterpiece-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .masterpiece-btn:hover::after {
+            transform: translateX(0);
+        }
+
+        /* ===================== */
+        /* BESPOKE SECTION */
+        /* ===================== */
+        .bespoke-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bespoke-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .bespoke-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        @media (min-width: 768px) {
+            .bespoke-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        .bespoke-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 50px;
+        }
+
+        .bespoke-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        @media (min-width: 768px) {
+            .bespoke-features {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .bespoke-feature {
+            padding: 30px;
+            background: var(--glass);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .bespoke-feature:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .bespoke-feature i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .bespoke-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 50px;
+            background: var(--gradient-gold);
+            color: var(--black);
+            border: none;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bespoke-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        /* ===================== */
+        /* VIP ACCESS */
+        /* ===================== */
+        .vip-section {
+            padding: 100px 0;
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vip-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1512856246667-5a2e2a729b92?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80') no-repeat center center/cover;
+            opacity: 0.1;
+            mix-blend-mode: overlay;
+        }
+
+        .vip-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .vip-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        @media (min-width: 768px) {
+            .vip-title {
+                font-size: 3.5rem;
+            }
+        }
+
+        .vip-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 50px;
+        }
+
+        .vip-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            border-radius: 4px;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffd700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--gold);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .vip-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient-gold);
+            color: var(--black);
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .vip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ===================== */
+        /* FOOTER */
+        /* ===================== */
+        footer {
+            padding: 60px 0 30px;
+            background-color: #050505;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 80px 0 40px;
+            }
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-gold);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 50px;
+                margin-bottom: 60px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 60px;
+                margin-bottom: 80px;
+            }
+        }
+
+        .footer-column {
+            position: relative;
+            padding-top: 20px;
+        }
+
+        .footer-column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gradient-gold);
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+            padding-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-title {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links li {
+                margin-bottom: 15px;
+            }
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 0;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links a {
+                font-size: 1rem;
+            }
+        }
+
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            color: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 20px;
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--off-white);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+
+        @media (min-width: 768px) {
+            .copyright {
+                padding-top: 40px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ===================== */
+        /* ACCESSIBILITY */
+        /* ===================== */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .cursor, .cursor-follower {
+                display: none !important;
+            }
+            
+            body {
+                cursor: auto !important;
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .cursor, .cursor-follower {
+                display: none !important;
+            }
+            
+            body {
+                cursor: auto !important;
+            }
+            
+            .masterpiece-item:hover {
+                transform: none;
+            }
+            
+            .bespoke-feature:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-text">MASTERPIECE</div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">ULTIMA</a>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" data-text="HOME">HOME</a></li>
+                <li><a href="collections.html" data-text="COLLECTIONS">COLLECTIONS</a></li>
+                <li><a href="masterpiece.html" data-text="MASTERPIECE">MASTERPIECE</a></li>
+                <li><a href="index.html#concierge" data-text="CONCIERGE">CONCIERGE</a></li>
+                <li><a href="index.html#contact" data-text="CONTACT">CONTACT</a></li>
+            </ul>
+            
+            <div class="nav-icons">
+                <a href="#" aria-label="Search"><i class="fas fa-search"></i></a>
+                <a href="#" aria-label="Wishlist"><i class="fas fa-heart"></i></a>
+                <a href="#" aria-label="Shopping Bag"><i class="fas fa-shopping-bag"></i></a>
+                <a href="#" aria-label="User Account"><i class="fas fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Masterpiece Hero -->
+    <section class="masterpiece-hero">
+        <div class="container masterpiece-hero-content">
+            <h1 class="masterpiece-hero-title">MASTERPIECE COLLECTION</h1>
+            <p class="masterpiece-hero-subtitle">Beyond fragrance, beyond time. Experience the pinnacle of perfumery with our exclusive Masterpiece Collection - where art, luxury, and rarity converge in perfect harmony.</p>
+        </div>
+    </section>
+
+    <!-- Masterpiece Intro -->
+    <section class="masterpiece-intro">
+        <div class="container intro-container">
+            <h2 class="intro-title">The Art of Exclusivity</h2>
+            <p class="intro-text">
+                Our Masterpiece Collection represents the absolute zenith of perfumery. Each creation is a limited edition work of art, crafted with ingredients of unparalleled rarity and presented in vessels of extraordinary craftsmanship. These are not merely perfumes - they are heirloom pieces, investments in olfactory art, and statements of ultimate luxury.
+            </p>
+            <div class="intro-stats">
+                <div class="stat-item">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Bottles Maximum</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2-5</div>
+                    <div class="stat-label">Years to Create</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Handcrafted</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1/1</div>
+                    <div class="stat-label">Certified</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masterpiece Collections -->
+    <section class="masterpiece-collections">
+        <div class="container">
+            <h2 class="collections-title">Current Masterpieces</h2>
+            
+            <div class="masterpiece-grid">
+                <!-- Masterpiece 1 -->
+                <div class="masterpiece-item">
+                    <img src="https://images.unsplash.com/photo-1593990965218-9e8c6c1b6c6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="L'Éternel" class="masterpiece-image">
+                    <div class="masterpiece-info">
+                        <div class="masterpiece-limited">LIMITED TO 50 BOTTLES</div>
+                        <h3 class="masterpiece-name">L'Éternel</h3>
+                        <div class="masterpiece-price">$25,000 <span class="price-note">(Price upon request)</span></div>
+                        <a href="#contact" class="masterpiece-btn">REQUEST APPOINTMENT</a>
+                    </div>
+                </div>
+                
+                <!-- Masterpiece 2 -->
+                <div class="masterpiece-item">
+                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Imperial Gold" class="masterpiece-image">
+                    <div class="masterpiece-info">
+                        <div class="masterpiece-limited">LIMITED TO 10 BOTTLES</div>
+                        <h3 class="masterpiece-name">Imperial Gold</h3>
+                        <div class="masterpiece-price">$50,000 <span class="price-note">(Price upon request)</span></div>
+                        <a href="#contact" class="masterpiece-btn">PRIVATE VIEWING</a>
+                    </div>
+                </div>
+                
+                <!-- Masterpiece 3 -->
+                <div class="masterpiece-item">
+                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Noir Absolu" class="masterpiece-image">
+                    <div class="masterpiece-info">
+                        <div class="masterpiece-limited">LIMITED TO 25 BOTTLES</div>
+                        <h3 class="masterpiece-name">Noir Absolu</h3>
+                        <div class="masterpiece-price">$18,000 <span class="price-note">(Price upon request)</span></div>
+                        <a href="#contact" class="masterpiece-btn">EXPLORE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bespoke Section -->
+    <section class="bespoke-section">
+        <div class="container bespoke-container">
+            <h2 class="bespoke-title">Bespoke Creation</h2>
+            <p class="bespoke-text">
+                For those who seek the ultimate personal expression, our Master Perfumers offer bespoke fragrance creation. Working exclusively with you, we craft a scent that is uniquely yours - a true olfactory signature that will never be reproduced.
+            </p>
+            
+            <div class="bespoke-features">
+                <div class="bespoke-feature">
+                    <i class="fas fa-user-crown"></i>
+                    <h4 class="feature-title">Personal Consultation</h4>
+                    <p class="feature-description">Private sessions with Master Perfumer to understand your essence and vision.</p>
+                </div>
+                
+                <div class="bespoke-feature">
+                    <i class="fas fa-gem"></i>
+                    <h4 class="feature-title">Rare Ingredients</h4>
+                    <p class="feature-description">Access to our vault of rare and precious ingredients from around the world.</p>
+                </div>
+                
+                <div class="bespoke-feature">
+                    <i class="fas fa-crown"></i>
+                    <h4 class="feature-title">Exclusive Vessel</h4>
+                    <p class="feature-description">Custom-designed bottle and packaging created exclusively for your fragrance.</p>
+                </div>
+            </div>
+            
+            <a href="#vip" class="bespoke-btn">INQUIRE ABOUT BESPOKE</a>
+        </div>
+    </section>
+
+    <!-- VIP Access Section -->
+    <section class="vip-section" id="vip">
+        <div class="container vip-container">
+            <h2 class="vip-title">VIP Access Application</h2>
+            <p class="vip-text">
+                Access to our Masterpiece Collection is by application only. Please complete the form below to begin your journey into the world of ultra-exclusive perfumery. Our Concierge team will contact you within 48 hours.
+            </p>
+            
+            <form class="vip-form" id="vipForm">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Full Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Email Address" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" class="form-input" placeholder="Phone Number" required>
+                </div>
+                
+                <div class="form-group">
+                    <select class="form-select" required>
+                        <option value="" disabled selected>Primary Interest</option>
+                        <option value="current">Current Masterpieces</option>
+                        <option value="bespoke">Bespoke Creation</option>
+                        <option value="archive">Archive Pieces</option>
+                        <option value="corporate">Corporate Gifting</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <select class="form-select" required>
+                        <option value="" disabled selected>Estimated Budget</option>
+                        <option value="10-20">$10,000 - $20,000</option>
+                        <option value="20-50">$20,000 - $50,000</option>
+                        <option value="50+">$50,000+</option>
+                        <option value="custom">Custom Budget</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="vip-btn">SUBMIT APPLICATION</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3 class="footer-title">ULTIMA</h3>
+                    <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 20px; line-height: 1.6;">Crafting exceptional fragrances since 1985. Our commitment to quality and artistry defines every creation.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Masterpieces</h3>
+                    <ul class="footer-links">
+                        <li><a href="#l-eternel">L'Éternel</a></li>
+                        <li><a href="#imperial-gold">Imperial Gold</a></li>
+                        <li><a href="#noir-absolu">Noir Absolu</a></li>
+                        <li><a href="#bespoke">Bespoke Creation</a></li>
+                        <li><a href="#archive">Archive Collection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#private-viewing">Private Viewings</a></li>
+                        <li><a href="#bespoke">Bespoke Consultation</a></li>
+                        <li><a href="#vip">VIP Access</a></li>
+                        <li><a href="#corporate">Corporate Gifting</a></li>
+                        <li><a href="#authentication">Authentication</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact</h3>
+                    <ul class="footer-links" style="list-style: none;">
+                        <li><i class="fas fa-map-marker-alt"></i> 5th Avenue, New York</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> masterpiece@ultima.com</li>
+                        <li><i class="fas fa-clock"></i> By Appointment Only</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ULTIMA. All rights reserved. Masterpiece Collection - Ultra Exclusive Perfumery.</p>
+                <p style="margin-top: 10px; font-size: 0.7rem; color: rgba(255, 255, 255, 0.3);">All prices are subject to availability and private consultation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 3000);
+
+            // ========================
+            // CUSTOM CURSOR ANIMATION
+            // ========================
+            const cursor = document.getElementById('cursor');
+            const cursorFollower = document.getElementById('cursorFollower');
+            
+            // Only enable on desktop
+            if (window.matchMedia("(min-width: 768px)").matches) {
+                let mouseX = 0;
+                let mouseY = 0;
+                let followerX = 0;
+                let followerY = 0;
+                
+                // Track mouse movement
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    
+                    cursor.style.left = mouseX + 'px';
+                    cursor.style.top = mouseY + 'px';
+                });
+                
+                // Animate follower with delay
+                function animateFollower() {
+                    followerX += (mouseX - followerX) / 8;
+                    followerY += (mouseY - followerY) / 8;
+                    
+                    cursorFollower.style.left = followerX + 'px';
+                    cursorFollower.style.top = followerY + 'px';
+                    
+                    requestAnimationFrame(animateFollower);
+                }
+                
+                animateFollower();
+                
+                // Hover effects for interactive elements
+                const hoverElements = document.querySelectorAll('a, button, .masterpiece-item, .bespoke-feature, .form-input, .form-select, .nav-icons a, .logo, .bespoke-btn, .vip-btn');
+                
+                hoverElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.classList.add('hover');
+                        
+                        // Special effect for masterpiece items
+                        if (el.classList.contains('masterpiece-item') || 
+                            el.classList.contains('masterpiece-name') || 
+                            el.classList.contains('bespoke-title') ||
+                            el.classList.contains('vip-title')) {
+                            cursor.classList.add('text-hover');
+                        }
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('hover');
+                        cursor.classList.remove('text-hover');
+                        cursor.classList.remove('click');
+                    });
+                });
+                
+                // Click effect
+                document.addEventListener('mousedown', () => {
+                    cursor.classList.add('click');
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    cursor.classList.remove('click');
+                });
+                
+                // Touch device detection - disable cursor
+                if ('ontouchstart' in window || navigator.maxTouchPoints) {
+                    cursor.style.display = 'none';
+                    cursorFollower.style.display = 'none';
+                    document.body.style.cursor = 'auto';
+                }
+            }
+
+            // Header scroll effect
+            const header = document.getElementById('header');
+            const updateHeader = () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            };
+            
+            window.addEventListener('scroll', updateHeader);
+            updateHeader(); // Initial check
+
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isActive = navLinks.classList.contains('active');
+                
+                if (!isActive) {
+                    navLinks.classList.add('active');
+                    menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // Close menu when clicking outside on mobile
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth < 1024) {
+                    if (!e.target.closest('.header-container') && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+
+            // Close menu on escape key press
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // VIP Form Submission
+            const vipForm = document.getElementById('vipForm');
+            vipForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = this.querySelector('input[type="text"]').value;
+                const email = this.querySelector('input[type="email"]').value;
+                const interest = this.querySelector('.form-select').value;
+                
+                // In a real application, you would send this data to a server
+                alert(`Thank you ${name}! Your VIP application has been submitted. Our Concierge team will contact you at ${email} within 48 hours regarding ${interest}.`);
+                
+                // Reset form
+                vipForm.reset();
+            });
+
+            // Masterpiece item click handlers
+            document.querySelectorAll('.masterpiece-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const masterpieceName = this.closest('.masterpiece-info').querySelector('.masterpiece-name').textContent;
+                    
+                    if (this.textContent.includes('APPOINTMENT') || this.textContent.includes('VIEWING')) {
+                        // Scroll to VIP form
+                        document.getElementById('vip').scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        alert(`You have selected ${masterpieceName}. Our Concierge will contact you shortly.`);
+                    }
+                });
+            });
+
+            // Bespoke button
+            document.querySelector('.bespoke-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                // Scroll to VIP form
+                document.getElementById('vip').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (window.innerWidth >= 1024 && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = 'auto';
+                    }
+                    
+                    // Update cursor display on resize
+                    if (window.matchMedia("(min-width: 768px)").matches) {
+                        cursor.style.display = 'block';
+                        cursorFollower.style.display = 'block';
+                        document.body.style.cursor = 'none';
+                    } else {
+                        cursor.style.display = 'none';
+                        cursorFollower.style.display = 'none';
+                        document.body.style.cursor = 'auto';
+                    }
+                }, 250);
+            });
+
+            // Accessibility - show cursor on keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    cursor.style.display = 'none';
+                    cursorFollower.style.display = 'none';
+                    document.body.style.cursor = 'auto';
+                    
+                    // Re-enable after 2 seconds if using mouse
+                    setTimeout(() => {
+                        if (window.matchMedia("(min-width: 768px)").matches) {
+                            cursor.style.display = 'block';
+                            cursorFollower.style.display = 'block';
+                            document.body.style.cursor = 'none';
+                        }
+                    }, 2000);
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // Close mobile menu if open
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                            document.body.style.overflow = 'auto';
+                        }
+                        
+                        const headerHeight = header.offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        window.scrollTo({
+                            top: targetPosition - headerHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add parallax effect to hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.masterpiece-hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            console.log('ULTIMA Masterpiece Page - Exclusive Luxury Perfume Collection with Premium Animations');
+        });
+    </script>
+</body>
+</html>
